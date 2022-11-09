@@ -1,6 +1,6 @@
 import "./styles.css";
 
-const RSS_URL = `https://omnycontent.com/d/playlist/e73c998e-6e60-432f-8610-ae210140c5b1/A6620428-68FA-4B5D-A5AF-AE33005F660F/0660E13D-8AA3-45F5-90EF-AE33005F6621/podcast.rss`; // Player fails
+const RSS_URL = `https://omnycontent.com/d/playlist/e73c998e-6e60-432f-8610-ae210140c5b1/A6620428-68FA-4B5D-A5AF-AE33005F660F/0660E13D-8AA3-45F5-90EF-AE33005F6621/podcast.rss`; // Feed works
 // const RSS_URL = `https://podcasts.files.bbci.co.uk/p02nrtyw.rss`; // Feed works
 // const RSS_URL = `https://whatthefuckjusthappenedtoday.com/podcasts/index.xml`; // Starter Feed works
 
