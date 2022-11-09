@@ -191,25 +191,15 @@ fetch(RSS_URL).then(function (response) {
     var podTitle = el.querySelector("title").innerHTML,
       podPubDate = el.querySelector("pubDate").innerHTML,
       podLink = el.querySelector("link").innerHTML,
-      enclosureURL = el.querySelector("enclosure").getAttribute('url'),
-      enclosureType = el.querySelector("enclosure").getAttribute('type');
-    html += "\n        <article>\n          <h2>".concat(podTitle, "</h2>\n\n          <audio controls>\n            <source src=\"").concat(enclosureURL, "\" type=\"audio/mpeg\">\n            Your browser does not support the audio element.\n          </audio>\n          <p>").concat(enclosureType, "</p>\n\n          <p>").concat(el.querySelector("description").textContent, "</p>\n\n          <p>Episode Page: <a href=\"").concat(podLink, "\" target=\"_blank\" rel=\"noopener\" target=\"_blank\">").concat(podLink, "</a></p>\n\n          <p>Published: ").concat(podPubDate, "</p>\n        </article>\n      ");
-    console.log(podTitle);
-    console.log('-----');
+      podDescription = el.querySelector("description").textContent,
+      enclosureURL = el.querySelector("enclosure").getAttribute("url"),
+      enclosureType = el.querySelector("enclosure").getAttribute("type");
+    html += "\n        <article>\n          <h2>".concat(podTitle, "</h2>\n\n          <audio controls>\n            <source src=\"").concat(enclosureURL, "\" type=\"audio/mpeg\">\n            Your browser does not support the audio element.\n          </audio>\n          <p>").concat(enclosureType, "</p>\n\n          <p>").concat(podDescription, "</p>\n\n          <p>Episode Page: <a href=\"").concat(podLink, "\" target=\"_blank\" rel=\"noopener\" target=\"_blank\">").concat(podLink, "</a></p>\n\n          <p>Published: ").concat(podPubDate, "</p>\n        </article>\n      ");
   });
   document.getElementById("app").insertAdjacentHTML("beforeend", html);
   console.log(data);
   console.log(items);
 });
-
-// document.getElementById("app").innerHTML = `
-// <h1>Hello Vanilla!</h1>
-// <div>
-//   We use the same configuration as Parcel to bundle this sandbox, you can find more
-//   info about Parcel
-//   <a href="https://parceljs.org" target="_blank" rel="noopener noreferrer">here</a>.
-// </div>
-// `;
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

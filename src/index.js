@@ -11,12 +11,13 @@ fetch(RSS_URL)
     const items = data.querySelectorAll("item");
     let html = ``;
 
-    items.forEach(el => {
+    items.forEach((el) => {
       const podTitle = el.querySelector("title").innerHTML,
         podPubDate = el.querySelector("pubDate").innerHTML,
         podLink = el.querySelector("link").innerHTML,
-        enclosureURL = el.querySelector("enclosure").getAttribute('url'),
-        enclosureType = el.querySelector("enclosure").getAttribute('type');
+        podDescription = el.querySelector("description").textContent,
+        enclosureURL = el.querySelector("enclosure").getAttribute("url"),
+        enclosureType = el.querySelector("enclosure").getAttribute("type");
       html += `
         <article>
           <h2>${podTitle}</h2>
@@ -27,27 +28,16 @@ fetch(RSS_URL)
           </audio>
           <p>${enclosureType}</p>
 
-          <p>${el.querySelector("description").textContent}</p>
+          <p>${podDescription}</p>
 
           <p>Episode Page: <a href="${podLink}" target="_blank" rel="noopener" target="_blank">${podLink}</a></p>
 
           <p>Published: ${podPubDate}</p>
         </article>
       `;
-      console.log(podTitle);
-      console.log('-----');
     });
     document.getElementById("app").insertAdjacentHTML("beforeend", html);
 
     console.log(data);
     console.log(items);
   });
-
-// document.getElementById("app").innerHTML = `
-// <h1>Hello Vanilla!</h1>
-// <div>
-//   We use the same configuration as Parcel to bundle this sandbox, you can find more
-//   info about Parcel
-//   <a href="https://parceljs.org" target="_blank" rel="noopener noreferrer">here</a>.
-// </div>
-// `;
