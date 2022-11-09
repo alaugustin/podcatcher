@@ -176,8 +176,9 @@ module.hot.accept(reloadCSS);
 "use strict";
 
 require("./styles.css");
-var RSS_URL = "https://whatthefuckjusthappenedtoday.com/podcasts/index.xml";
-// const RSS_URL = `https://www.omnycontent.com/d/playlist/e73c998e-6e60-432f-8610-ae210140c5b1/e5f91208-cc7e-4726-a312-ae280140ad11/d64f756d-6d5e-4fae-b24f-ae280140ad36/podcast.rss`;
+var RSS_URL = "https://omnycontent.com/d/playlist/e73c998e-6e60-432f-8610-ae210140c5b1/A6620428-68FA-4B5D-A5AF-AE33005F660F/0660E13D-8AA3-45F5-90EF-AE33005F6621/podcast.rss"; // Player fails
+// const RSS_URL = `https://podcasts.files.bbci.co.uk/p02nrtyw.rss`; // Feed works
+// const RSS_URL = `https://whatthefuckjusthappenedtoday.com/podcasts/index.xml`; // Starter Feed works
 
 fetch(RSS_URL).then(function (response) {
   return response.text();
@@ -185,9 +186,30 @@ fetch(RSS_URL).then(function (response) {
   return new window.DOMParser().parseFromString(str, "text/xml");
 }).then(function (data) {
   var items = data.querySelectorAll("item");
+  var html = "";
+  items.forEach(function (el) {
+    var podTitle = el.querySelector("title").innerHTML,
+      podPubDate = el.querySelector("pubDate").innerHTML,
+      podLink = el.querySelector("link").innerHTML,
+      enclosureURL = el.querySelector("enclosure").getAttribute('url'),
+      enclosureType = el.querySelector("enclosure").getAttribute('type');
+    html += "\n        <article>\n          <h2>".concat(podTitle, "</h2>\n\n          <audio controls>\n            <source src=\"").concat(enclosureURL, "\" type=\"audio/mpeg\">\n            Your browser does not support the audio element.\n          </audio>\n          <p>").concat(enclosureType, "</p>\n\n          <p>").concat(el.querySelector("description").textContent, "</p>\n\n          <p>Episode Page: <a href=\"").concat(podLink, "\" target=\"_blank\" rel=\"noopener\" target=\"_blank\">").concat(podLink, "</a></p>\n\n          <p>Published: ").concat(podPubDate, "</p>\n        </article>\n      ");
+    console.log(podTitle);
+    console.log('-----');
+  });
+  document.getElementById("app").insertAdjacentHTML("beforeend", html);
+  console.log(data);
   console.log(items);
 });
-document.getElementById("app").innerHTML = "\n<h1>Hello Vanilla!</h1>\n<div>\n  We use the same configuration as Parcel to bundle this sandbox, you can find more\n  info about Parcel \n  <a href=\"https://parceljs.org\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.\n</div>\n";
+
+// document.getElementById("app").innerHTML = `
+// <h1>Hello Vanilla!</h1>
+// <div>
+//   We use the same configuration as Parcel to bundle this sandbox, you can find more
+//   info about Parcel
+//   <a href="https://parceljs.org" target="_blank" rel="noopener noreferrer">here</a>.
+// </div>
+// `;
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
